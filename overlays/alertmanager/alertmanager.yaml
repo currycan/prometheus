@@ -1,0 +1,9 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: alertmanager-main
+  namespace: monitoring
+spec:
+  image: quay.io/prometheus/alertmanager:v0.21.0
+  replicas: 1
+  version: v0.21.0

@@ -1,0 +1,28 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus-k8s
+  namespace: monitoring
+spec:
+  alerting:
+    alertmanagers:
+    - name: alertmanager
+      namespace: monitoring
+      port: web
+  image: quay.io/prometheus/prometheus:v2.22.1
+  replicas: 2
+  retention: 120h
+  retentionSize: ""
+  storage:
+    volumeClaimTemplate:
+      metadata:
+        name: prometheus-k8s
+        labels:
+          name: prometheus-k8s
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "nfs-storage-class"
+        resources:
+          requests:
+            storage: 50Gi
+  version: v2.22.1

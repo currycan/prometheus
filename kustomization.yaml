@@ -1,0 +1,77 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- namespace.yaml
+
+bases:
+- base/alertmanager
+- base/node-exporter
+- base/grafana
+- base/kube-state-metrics
+- base/prometheus
+- base/prometheus-adapter
+- base/prometheus-operator
+- monitors
+
+# namespace
+namespace: monitoring
+
+# 为所有资源添加标签
+commonLabels:
+  component: monitor
+  owner: andrew
+
+# grafana 设置 admin 账号初始密码
+secretGenerator:
+- name: grafana-login-secret
+  namespace: monitoring
+  behavior: merge
+  literals:
+  - username=admin
+  - password=p@ssw0rd
+
+images:
+# grafana
+- name: grafana
+  newName: grafana/grafana
+  newTag: 7.3.4
+# node-exporter
+- name: node-exporter
+  newName: quay.io/prometheus/node-exporter
+  newTag: v1.0.1
+- name: kube-rbac-proxy
+  newName: quay.io/brancz/kube-rbac-proxy
+  newTag: v0.8.0
+# kube-state-metrics
+- name: kube-state-metrics
+  newName: quay.io/coreos/kube-state-metrics
+  newTag: v1.9.7
+- name: kube-rbac-proxy
+  newName: quay.io/brancz/kube-rbac-proxy
+  newTag: v0.8.0
+# prometheus-adapter
+- name: k8s-prometheus-adapter
+  newName: directxman12/k8s-prometheus-adapter
+  newTag: v0.8.2
+
+replicas:
+- name: grafana
+  count: 1
+- name: kube-state-metrics
+  count: 1
+- name: prometheus-adapter
+  count: 1
+
+patchesStrategicMerge:
+# alertmanager
+- overlays/alertmanager/alertmanager.yaml
+- overlays/alertmanager/service.yaml
+# grafana
+- overlays/grafana/deployment.yaml
+- overlays/grafana/service.yaml
+# prometheus
+- overlays/prometheus/prometheus.yaml
+- overlays/prometheus/service.yaml
+# prometheus-operator
+- overlays/prometheus-operator/deployment.yaml
