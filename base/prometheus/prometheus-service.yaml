@@ -10,5 +10,7 @@ spec:
     targetPort: web
   selector:
     app: prometheus
-    prometheus: k8s
+    operator.prometheus.io/name: prometheus-k8s
+    operator.prometheus.io/shard: "0"
+    prometheus: prometheus-k8s
   sessionAffinity: ClientIP
