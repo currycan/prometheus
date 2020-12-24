@@ -7,8 +7,7 @@
 安装 kustomize: [Binaries | SIG CLI](https://kubectl.docs.kubernetes.io/installation/kustomize/binaries/)
 
 ```bash
-curl -s "https://raw.githubusercontent.com/\
-kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 ```
 
 kustomize 语法指导: [kustomization.yaml | SIG CLI](https://kubectl.docs.kubernetes.io/zh/api-reference/kustomization/)
@@ -21,6 +20,7 @@ kustomize 语法指导: [kustomization.yaml | SIG CLI](https://kubectl.docs.kube
 # crd资源安装
 kustomize build crds | kubectl apply -f -
 # rolebindings 安装
+kubectl create ns monitoring
 kustomize build rolebindings | kubectl apply -f -
 # 核心组件安装
 kustomize build . | kubectl apply -f -
