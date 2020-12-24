@@ -29,5 +29,7 @@ data:
       "window": "5m"
 kind: ConfigMap
 metadata:
+  labels:
+    name: prometheus-adapter
   name: adapter-config
   namespace: monitoring

@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/name: kube-state-metrics
   name: kube-state-metrics
   namespace: monitoring
 spec:

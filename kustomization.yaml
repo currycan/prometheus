@@ -17,10 +17,10 @@ bases:
 # namespace
 namespace: monitoring
 
-# 为所有资源添加标签
-commonLabels:
-  component: monitor
-  owner: andrew
+# # 为所有资源添加标签
+# commonLabels:
+#   component: monitor
+#   owner: andrew
 
 # grafana 设置 admin 账号初始密码
 secretGenerator:
