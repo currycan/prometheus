@@ -46,7 +46,7 @@ spec:
       regex: etcd_(debugging|disk|request|server).*
       sourceLabels:
       - __name__
-    port: https-metrics
+    port: http-metrics
     scheme: https
     tlsConfig:
       insecureSkipVerify: true
