@@ -46,8 +46,9 @@ spec:
       regex: etcd_(debugging|disk|request|server).*
       sourceLabels:
       - __name__
+    # 默认是 https 修改为 http
     port: http-metrics
-    scheme: https
+    scheme: http
     tlsConfig:
       insecureSkipVerify: true
   jobLabel: k8s-app

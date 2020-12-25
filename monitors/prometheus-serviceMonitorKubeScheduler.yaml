@@ -9,8 +9,9 @@ spec:
   endpoints:
   - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
     interval: 30s
+    # 默认是 https 修改为 http
     port: http-metrics
-    scheme: https
+    scheme: http
     tlsConfig:
       insecureSkipVerify: true
   jobLabel: k8s-app
