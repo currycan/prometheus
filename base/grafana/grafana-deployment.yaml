@@ -17,7 +17,9 @@ spec:
         app: grafana
     spec:
       containers:
-      - env: []
+      - env:
+        - name: TZ
+          value: Asia/Shanghai
         image: grafana
         name: grafana
         ports:

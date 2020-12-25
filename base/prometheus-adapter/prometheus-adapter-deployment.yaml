@@ -26,6 +26,9 @@ spec:
         - --metrics-relist-interval=1m
         - --prometheus-url=http://prometheus-k8s.monitoring.svc.cluster.local:9090/
         - --secure-port=6443
+        env:
+        - name: TZ
+          value: Asia/Shanghai
         image: k8s-prometheus-adapter
         name: prometheus-adapter
         ports:

@@ -55,6 +55,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: TZ
+          value: Asia/Shanghai
         image: kube-rbac-proxy
         name: kube-rbac-proxy
         ports:

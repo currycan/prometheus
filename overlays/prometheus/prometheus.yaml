@@ -13,6 +13,8 @@ spec:
   replicas: 2
   retention: 120h
   retentionSize: ""
+  secrets:
+  - etcd-certs
   storage:
     volumeClaimTemplate:
       metadata:

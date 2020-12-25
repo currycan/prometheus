@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kube-etcd
+  namespace: monitoring
+  labels:
+    k8s-app: kube-etcd
+spec:
+  jobLabel: k8s-app
+  endpoints:
+  - port: https-metrics
+    interval: 30s
+    scheme: https
+    tlsConfig:
+      # caFile: /etc/prometheus/secrets/etcd-certs/ca.crt
+      # certFile: /etc/prometheus/secrets/etcd-certs/healthcheck-client.crt
+      # keyFile: /etc/prometheus/secrets/etcd-certs/healthcheck-client.key
+      caFile: /etc/prometheus/secrets/etcd-certs/ca.pem
+      certFile: /etc/prometheus/secrets/etcd-certs/healthcheck-client.pem
+      keyFile: /etc/prometheus/secrets/etcd-certs/healthcheck-client-key.pem
+      insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      k8s-app: kube-etcd

@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
 - alertmanager-serviceMonitor.yaml
 - grafana-serviceMonitor.yaml
+- kube-etcd-serviceMonitor.yaml
+- kube-proxy-serviceMonitor.yaml
 - kube-state-metrics-serviceMonitor.yaml
 - node-exporter-serviceMonitor.yaml
 - prometheus-adapter-serviceMonitor.yaml
