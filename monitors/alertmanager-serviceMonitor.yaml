@@ -10,6 +10,4 @@ spec:
     port: web
   selector:
     matchLabels:
-      component: monitor
-      owner: andrew
-      app: alertmanager
+      alertmanager: main
