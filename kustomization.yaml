@@ -55,13 +55,13 @@ images:
   newName: directxman12/k8s-prometheus-adapter
   newTag: v0.8.2
 
-replicas:
-- name: grafana
-  count: 1
-- name: kube-state-metrics
-  count: 1
-- name: prometheus-adapter
-  count: 1
+# replicas:
+# - name: grafana
+#   count: 1
+# - name: kube-state-metrics
+#   count: 1
+# - name: prometheus-adapter
+#   count: 1
 
 patchesStrategicMerge:
 # alertmanager

@@ -8,6 +8,12 @@
 
 ```bash
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+
+# 或者直接 GitHub 下载
+VERSION=v3.9.1
+https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${VERSION}/kustomize_${VERSION}_linux_amd64.tar.gz
+tar zxvf kustomize_${VERSION}_linux_amd64.tar.gz -C /usr/local/bin
+chmod +x /usr/local/bin/kustomize
 ```
 
 kustomize 语法指导: [kustomization.yaml | SIG CLI](https://kubectl.docs.kubernetes.io/zh/api-reference/kustomization/)
@@ -45,6 +51,14 @@ kustomize build crds | kubectl apply -f -
 kustomize build rolebindings | kubectl apply -f -
 # 核心组件安装
 kustomize build . | kubectl apply -f -
+```
+
+k8s 高版本中集成 kustumize
+
+```bash
+kubectl apply -k crds
+kubectl apply -k rolebindings
+kubectl apply -k .
 ```
 
 ## 卸载
