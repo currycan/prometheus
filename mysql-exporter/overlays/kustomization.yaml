@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- service-monitor.yaml
+
+bases:
+- ../base
+
+# namespace
+namespace: monitoring
+
+images:
+- name: mysql-exporter
+  newName: prom/mysqld-exporter
+  newTag: v0.12.1
+
+replicas:
+- name: mysql-exporter
+  count: 1
+
+patchesStrategicMerge:
+- secret.yaml

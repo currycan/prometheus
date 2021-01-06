@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-exporter
+  labels:
+    app.kubernetes.io/instance: mysql-exporter
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: mysql-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: mysql-exporter
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9104"
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - name: prometheus-mysql-exporter
+        image: "mysql-exporter"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TZ
+          value: Asia/Shanghai
+        envFrom:
+        - secretRef:
+            name: mysql-exporter
+        ports:
+          - containerPort: 9104
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9104
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9104
+        resources:
+          {}
