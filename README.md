@@ -33,12 +33,12 @@ kubectl label ns monitoring component=monitorn owner=andrew
 
 ```bash
 etcd_cert_path="/etc/kubernetes/pki/etcd"
-# etcd_ca="${etcd_cert_path}/ca.crt"
-# etcd_key="${etcd_cert_path}/healthcheck-client.key"
-# etcd_crt="${etcd_cert_path}/healthcheck-client.crt"
-etcd_ca="${etcd_cert_path}/ca.pem"
-etcd_key="${etcd_cert_path}/healthcheck-client-key.pem"
-etcd_crt="${etcd_cert_path}/healthcheck-client.pem"
+# etcd_ca="${etcd_cert_path}/ca.pem"
+# etcd_key="${etcd_cert_path}/healthcheck-client-key.pem"
+# etcd_crt="${etcd_cert_path}/healthcheck-client.pem"
+etcd_ca="${etcd_cert_path}/ca.crt"
+etcd_key="${etcd_cert_path}/healthcheck-client.key"
+etcd_crt="${etcd_cert_path}/healthcheck-client.crt"
 kubectl -n monitoring create secret generic etcd-certs --from-file=${etcd_crt} --from-file=${etcd_key} --from-file=${etcd_ca}
 ```
 
