@@ -20,9 +20,9 @@ spec:
     spec:
       containers:
       - args:
-        # - --cert-dir=/var/run/serving-cert
-        - --tls-cert-file=/var/run/serving-cert/serving.crt
-        - --tls-private-key-file=/var/run/serving-cert/serving.key
+        - --cert-dir=/var/run/serving-cert
+        # - --tls-cert-file=/var/run/serving-cert/serving.crt
+        # - --tls-private-key-file=/var/run/serving-cert/serving.key
         - --logtostderr=true
         - --prometheus-url=http://prometheus-k8s.monitoring.svc.cluster.local:9090/
         - --metrics-relist-interval=1m
@@ -42,7 +42,6 @@ spec:
           readOnly: true
         - mountPath: /etc/adapter/
           name: config
-          readOnly: false
           readOnly: true
         - mountPath: /tmp
           name: tmp-vol
