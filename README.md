@@ -29,7 +29,7 @@ kubectl create ns monitoring
 kubectl label ns monitoring component=monitorn owner=andrew
 ```
 
-- 创建 prometheus 采集指标认证密钥
+- 创建 etcd prometheus 采集指标认证密钥
 
 ```bash
 etcd_cert_path="/etc/kubernetes/pki/etcd"
@@ -40,6 +40,12 @@ etcd_ca="${etcd_cert_path}/ca.crt"
 etcd_key="${etcd_cert_path}/healthcheck-client.key"
 etcd_crt="${etcd_cert_path}/healthcheck-client.crt"
 kubectl -n monitoring create secret generic etcd-certs --from-file=${etcd_crt} --from-file=${etcd_key} --from-file=${etcd_ca}
+```
+
+- 创建 adapter 认证密钥
+
+```bash
+bash create-adapter-cert.sh
 ```
 
 - 部署应用
@@ -60,6 +66,33 @@ kubectl apply -k crds
 kubectl apply -k rolebindings
 kubectl apply -k .
 ```
+
+## 获取 adapter 指标
+
+- 列出由prometheus提供的自定义指标: `kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1" | jq .`
+- 查看新创建的api群组: `kubectl api-versions  | grep metrics`
+
+  ```bash
+  # kubectl api-versions  | grep metrics
+  custom.metrics.k8s.io/v1beta1
+  custom.metrics.k8s.io/v1beta2
+  external.metrics.k8s.io/v1beta1
+  metrics.k8s.io/v1beta1
+
+  # kubectl api-versions  | grep autoscaling
+  autoscaling/v1
+  autoscaling/v2beta1
+  autoscaling/v2beta2
+  ```
+
+- Pod 的Prometheus 适配器所提供的缺省定制指标: `kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1" | jq .  |grep "pods/"`
+
+- 举例来说,需要对 java 应用 `jvm_threads_states_threads` 指标 HPA, 查询:
+
+  ```bash
+  # kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/demo-jmx/pods/*/jvm_threads_states_threads"
+  {"kind":"MetricValueList","apiVersion":"custom.metrics.k8s.io/v1beta1","metadata":{"selfLink":"/apis/custom.metrics.k8s.io/v1beta1/namespaces/demo-jmx/pods/%2A/jvm_threads_states_threads"},"items":[{"describedObject":{"kind":"Pod","namespace":"demo-jmx","name":"demo-app-5d45f58f59-wz5fm","apiVersion":"/v1"},"metricName":"jvm_threads_states_threads","timestamp":"2021-01-07T10:19:41Z","value":"27","selector":null}]}
+  ```
 
 ## 卸载
 
