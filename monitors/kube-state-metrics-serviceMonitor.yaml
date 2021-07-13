@@ -2,7 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
+    app.kubernetes.io/component: exporter
     app.kubernetes.io/name: kube-state-metrics
+    app.kubernetes.io/part-of: kube-prometheus
   name: kube-state-metrics
   namespace: monitoring
 spec:
@@ -27,4 +29,6 @@ spec:
   jobLabel: app.kubernetes.io/name
   selector:
     matchLabels:
+      app.kubernetes.io/component: exporter
       app.kubernetes.io/name: kube-state-metrics
+      app.kubernetes.io/part-of: kube-prometheus

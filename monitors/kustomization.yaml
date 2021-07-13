@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - alertmanager-serviceMonitor.yaml
+- blackbox-exporter-serviceMonitor.yaml
 - grafana-serviceMonitor.yaml
 - kube-etcd-serviceMonitor.yaml
 - kube-proxy-serviceMonitor.yaml
@@ -10,9 +11,9 @@ resources:
 - node-exporter-serviceMonitor.yaml
 - prometheus-adapter-serviceMonitor.yaml
 - prometheus-operator-serviceMonitor.yaml
-- prometheus-serviceMonitorApiserver.yaml
-- prometheus-serviceMonitorCoreDNS.yaml
-- prometheus-serviceMonitorKubeControllerManager.yaml
-- prometheus-serviceMonitorKubelet.yaml
-- prometheus-serviceMonitorKubeScheduler.yaml
+- kubernetes-serviceMonitorApiserver.yaml
+- kubernetes-serviceMonitorCoreDNS.yaml
+- kubernetes-serviceMonitorKubeControllerManager.yaml
+- kubernetes-serviceMonitorKubelet.yaml
+- kubernetes-serviceMonitorKubeScheduler.yaml
 - prometheus-serviceMonitor.yaml

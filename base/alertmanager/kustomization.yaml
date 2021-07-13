@@ -6,3 +6,4 @@ resources:
 - alertmanager-secret.yaml
 - alertmanager-service.yaml
 - alertmanager-serviceAccount.yaml
+- alertmanager-podDisruptionBudget.yaml

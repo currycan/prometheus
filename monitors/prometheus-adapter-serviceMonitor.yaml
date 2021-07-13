@@ -2,7 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    name: prometheus-adapter
+    app.kubernetes.io/component: metrics-adapter
+    app.kubernetes.io/name: prometheus-adapter
+    app.kubernetes.io/part-of: kube-prometheus
   name: prometheus-adapter
   namespace: monitoring
 spec:
@@ -15,4 +17,6 @@ spec:
       insecureSkipVerify: true
   selector:
     matchLabels:
-      name: prometheus-adapter
+      app.kubernetes.io/component: metrics-adapter
+      app.kubernetes.io/name: prometheus-adapter
+      app.kubernetes.io/part-of: kube-prometheus

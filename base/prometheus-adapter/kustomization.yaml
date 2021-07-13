@@ -13,3 +13,4 @@ resources:
 - prometheus-adapter-deployment.yaml
 - prometheus-adapter-serviceAccount.yaml
 - prometheus-adapter-service.yaml
+- prometheus-adapter-podDisruptionBudget.yaml

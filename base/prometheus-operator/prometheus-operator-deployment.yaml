@@ -1,6 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/name: prometheus-operator
+    app.kubernetes.io/part-of: kube-prometheus
   name: prometheus-operator
   namespace: monitoring
 spec:
@@ -8,11 +12,15 @@ spec:
     matchLabels:
       app.kubernetes.io/component: controller
       app.kubernetes.io/name: prometheus-operator
+      app.kubernetes.io/part-of: kube-prometheus
   template:
     metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: prometheus-operator
       labels:
         app.kubernetes.io/component: controller
         app.kubernetes.io/name: prometheus-operator
+        app.kubernetes.io/part-of: kube-prometheus
     spec:
       containers:
       - name: prometheus-operator
@@ -35,12 +43,19 @@ spec:
         ports:
         - containerPort: 8443
           name: https
+        resources:
+          limits:
+            cpu: 20m
+            memory: 40Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
         securityContext:
           runAsGroup: 65532
           runAsNonRoot: true
           runAsUser: 65532
       nodeSelector:
-        beta.kubernetes.io/os: linux
+        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534

@@ -10,5 +10,14 @@ resources:
 - prometheus-clusterRole.yaml
 - prometheus-roleBindingConfig.yaml
 - prometheus-roleConfig.yaml
-- prometheus-rules.yaml
 - prometheus-service.yaml
+# - prometheus-rules.yaml
+- alertmanager-prometheusRule.yaml
+- prometheus-prometheusRule.yaml
+- kube-prometheus-prometheusRule.yaml
+- kubernetes-prometheusRule.yaml
+- prometheus-operator-prometheusRule.yaml
+- kube-state-metrics-prometheusRule.yaml
+- node-exporter-prometheusRule.yaml
+
+# - prometheus-podDisruptionBudget.yaml

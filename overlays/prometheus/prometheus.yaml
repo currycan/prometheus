@@ -6,10 +6,18 @@ metadata:
 spec:
   alerting:
     alertmanagers:
-    - name: alertmanager
+    - apiVersion: v2
+      name: alertmanager-main
       namespace: monitoring
       port: web
-  image: quay.io/prometheus/prometheus:v2.22.1
+  enableFeatures: []
+  externalLabels: {}
+  image: quay.io/prometheus/prometheus:v2.28.0
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: kube-prometheus
   replicas: 2
   retention: 120h
   retentionSize: ""
@@ -27,4 +35,4 @@ spec:
         resources:
           requests:
             storage: 50Gi
-  version: v2.22.1
+  version: v2.28.0

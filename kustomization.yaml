@@ -6,6 +6,7 @@ resources:
 
 bases:
 - base/alertmanager
+- base/blackbox
 - base/node-exporter
 - base/grafana
 - base/kube-state-metrics
@@ -32,28 +33,40 @@ secretGenerator:
   - password=p@ssw0rd
 
 images:
+# blackbox
+- name: blackbox-exporter
+  newName: quay.io/prometheus/blackbox-exporter
+  newTag: v0.19.0
+- name: configmap-reload
+  newName: jimmidyson/configmap-reload
+  newTag: v0.5.0
+- name: kube-rbac-proxy
+  newName: quay.io/brancz/kube-rbac-proxy
+  newTag: v0.10.0
 # grafana
 - name: grafana
   newName: grafana/grafana
-  newTag: 7.3.4
+  newTag: 8.0.3
 # node-exporter
 - name: node-exporter
   newName: quay.io/prometheus/node-exporter
-  newTag: v1.0.1
+  newTag: v1.1.2
 - name: kube-rbac-proxy
   newName: quay.io/brancz/kube-rbac-proxy
-  newTag: v0.8.0
+  newTag: v0.10.0
 # kube-state-metrics
 - name: kube-state-metrics
-  newName: quay.io/coreos/kube-state-metrics
-  newTag: v1.9.7
+  # newName: k8s.gcr.io/kube-state-metrics/kube-state-metrics
+  # newTag: v2.1.0
+  newName: bitnami/kube-state-metrics
+  newTag: 2.1.0
 - name: kube-rbac-proxy
   newName: quay.io/brancz/kube-rbac-proxy
-  newTag: v0.8.0
+  newTag: v0.10.0
 # prometheus-adapter
 - name: k8s-prometheus-adapter
   newName: directxman12/k8s-prometheus-adapter
-  newTag: v0.8.2
+  newTag: v0.8.4
 
 # replicas:
 # - name: grafana

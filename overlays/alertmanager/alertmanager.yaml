@@ -4,6 +4,18 @@ metadata:
   name: alertmanager-main
   namespace: monitoring
 spec:
-  image: quay.io/prometheus/alertmanager:v0.21.0
+  image: quay.io/prometheus/alertmanager:v0.22.0
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: alert-router
+      app.kubernetes.io/name: alertmanager
+      app.kubernetes.io/part-of: kube-prometheus
   replicas: 1
-  version: v0.21.0
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 4m
+      memory: 100Mi
+  version: v0.22.0

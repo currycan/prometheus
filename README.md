@@ -52,7 +52,7 @@ bash create-adapter-cert.sh
 
 ```bash
 # crd资源安装
-kustomize build crds | kubectl apply -f -
+kubectl apply -f crds
 # rolebindings 安装
 kustomize build rolebindings | kubectl apply -f -
 # 核心组件安装

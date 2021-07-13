@@ -9,10 +9,10 @@ spec:
     spec:
       containers:
       - name: prometheus-operator
-        image: quay.io/prometheus-operator/prometheus-operator:v0.44.1
+        image: quay.io/prometheus-operator/prometheus-operator:v0.48.1
         args:
         - --kubelet-service=kube-system/kubelet
-        - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.44.1
+        - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.48.1
 
       - name: kube-rbac-proxy
         image: quay.io/brancz/kube-rbac-proxy:v0.8.0
