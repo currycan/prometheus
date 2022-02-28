@@ -106,3 +106,6 @@ kustomize build crds | kubectl delete -f -
 - service monitor 采集不到指标排查: 1. 查看 prometheus 日志; 2. 查看 servicemonitor 资源对应端口是否写对?对应标签选择器是否写对?(service 标签);3. 查看 service 对应 endpoint 是否正常?
 
 - service monitor 删除后需要等待一段时间后才会刷新.
+
+- 匹配的 Service 的labels，如果使用mathLabels，则下面的所有标签都匹配时才会匹配该service，如果使用matchExpressions，则至少匹配一个标签的service都会被选择
+
