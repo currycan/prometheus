@@ -1,0 +1,13 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: grafana-storage
+  namespace: monitoring
+spec:
+  storageClassName: nfs-storage-class
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

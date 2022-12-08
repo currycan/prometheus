@@ -4,6 +4,16 @@ metadata:
   name: prometheus-k8s
   namespace: monitoring
 spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - prometheus
+        topologyKey: topology.kubernetes.io/zone
   alerting:
     alertmanagers:
     - name: alertmanager
@@ -12,9 +22,15 @@ spec:
   image: quay.io/prometheus/prometheus:v2.22.1
   replicas: 2
   retention: 120h
-  retentionSize: ""
+  retentionSize: "2GB"
   secrets:
   - etcd-certs
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/instance: k8s
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: kube-prometheus
   storage:
     volumeClaimTemplate:
       metadata:

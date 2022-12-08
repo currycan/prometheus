@@ -5,7 +5,8 @@ resources:
 - grafana-dashboardDatasources.yaml
 - grafana-dashboardDefinitions.yaml
 - grafana-dashboardSources.yaml
-- grafana-deployment.yaml
+- grafana-pvc.yaml
 - grafana-login-secret.yaml
 - grafana-serviceAccount.yaml
+- grafana-deployment.yaml
 - grafana-service.yaml

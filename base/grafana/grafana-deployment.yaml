@@ -11,8 +11,6 @@ spec:
       app: grafana
   template:
     metadata:
-      annotations:
-        checksum/grafana-datasources: 48faab41f579fc8efde6034391496f6a
       labels:
         app: grafana
     spec:
@@ -122,8 +120,9 @@ spec:
         runAsUser: 65534
       serviceAccountName: grafana
       volumes:
-      - emptyDir: {}
-        name: grafana-storage
+      - name: grafana-storage
+        persistentVolumeClaim:
+          claimName: grafana-storage
       - name: grafana-datasources
         secret:
           secretName: grafana-datasources
